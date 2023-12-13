@@ -1,4 +1,4 @@
-#include "main.h"
+#include "simpleshell.h"
 
 #define MAX_INPUT_SIZE 100
 
