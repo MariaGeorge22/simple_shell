@@ -14,8 +14,10 @@ int main(void)
 		display_prompt();
 		command = read_command();
 
-		if (command == NULL) {
-			printf("\n");  // Handle Ctrl+D (end of file)
+		if (command == NULL)
+		{
+			/* Handle Ctrl+D (end of file) */
+			printf("\n");
 			break;
 		}
 
@@ -29,7 +31,8 @@ int main(void)
 void display_prompt(void)
 {
 	printf("$ ");
-	fflush(stdout);  // Flush the output buffer to ensure the prompt is displayed immediately
+	/* Flush output buffer to ensure the prompt is displayed immediately */
+	fflush(stdout);
 }
 
 char *read_command(void)
@@ -40,13 +43,17 @@ char *read_command(void)
 
 	characters = getline(&buffer, &bufsize, stdin);
 
-	if (characters == -1) {
+	if (characters == -1)
+	{
 		free(buffer);
-		return NULL;  // Return NULL on Ctrl+D (end of file)
+		/* Return NULL on Ctrl+D (end of file) */
+		return NULL;
 	}
 
-	if (characters > 0 && buffer[characters - 1] == '\n') {
-		buffer[characters - 1] = '\0';  // Remove the newline character
+	if (characters > 0 && buffer[characters - 1] == '\n')
+	{
+		/* Remove the newline character */
+		buffer[characters - 1] = '\0';
 	}
 
 	return buffer;
@@ -67,7 +74,7 @@ void execute_command(const char *command)
 
 	if (pid == 0)
 	{
-		// Child process
+		/* Child process */
 		if (execlp(command, command, (char *)NULL) == -1) {
 			perror("execlp");
 			exit(EXIT_FAILURE);
@@ -75,7 +82,7 @@ void execute_command(const char *command)
 	}
 	else
 	{
-		// Parent process
+		/* Parent process */
 		do {
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
