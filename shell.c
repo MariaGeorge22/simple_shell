@@ -4,7 +4,7 @@
 
 void display_prompt(void);
 char *read_command(void);
-void execute_command(const char *command, char *program_name);
+void execute_command(char *command, char *program_name);
 
 int main(void)
 {
@@ -21,7 +21,7 @@ int main(void)
 			break;
 		}
 
-		execute_command(command);
+		execute_command(command, "./hsh");
 		free(command);
 	}
 
@@ -59,12 +59,12 @@ char *read_command(void)
 	return buffer;
 }
 
-void execute_command(const char *command, char *program_name)
+void execute_command(char *command, char *program_name)
 {
 	pid_t pid;
 	int status;
-	char *argv[] = {command, NULL};
-	char *envp[] = {NULL};
+	char *argv[2];
+	char *envp[1];
 
 	pid = fork();
 
@@ -77,9 +77,13 @@ void execute_command(const char *command, char *program_name)
 	if (pid == 0)
 	{
 		/* Child process */
+		argv[0] = command;
+		argv[1] =  NULL;
+		/*envp[] = {NULL};*/
+
 		if (execve(command, argv, envp) == -1)
 		{
-			perror(stderr, "%s: 1: %s: not found\n", program_name,
+			fprintf(stderr, "%s: 1: %s: not found\n", program_name,
 				command);
 			exit(EXIT_FAILURE);
 		}
