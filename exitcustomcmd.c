@@ -3,23 +3,23 @@
 static char buffer[MAX_READ_BUFFER_SIZE + 1] = {'\0'}, *temp;
 static ssize_t read_len = 0, read_status, temp_len;
 /**
- * custom_commands_handle - custom commands formatting
- * @sringline: this string is to find arguments
- * @args: the arguments
+ * handle_custom_command - command format
+ * @line: string to find argument
+ * @args: arguments
  * @program_name: program name
  *
- * custom arguments handling
+ * handles custom argument
  *
  * Return: true if found,
- * false if generic
+ * false if general
  */
-bool custom_commands_handle(char *sringline, char ***args, char *program_name)
+bool handle_custom_command(char *line, char ***args, char *program_name)
 {
 	char *temp = NULL;
 
-	if (strncmp(sringline, "exit", 4) == 0)
+	if (strncmp(line, "exit", 4) == 0)
 	{
-		temp = strtok(sringline, " ");
+		temp = strtok(line, " ");
 		temp = strtok(NULL, " ");
 		if (temp != NULL)
 		{
@@ -40,7 +40,7 @@ bool custom_commands_handle(char *sringline, char ***args, char *program_name)
 
 		return (true);
 	}
-	else if (strncmp(sringline, "env", 3) == 0)
+	else if (strncmp(line, "env", 3) == 0)
 	{
 		*args = safe_malloc(sizeof(char *) * 2, program_name);
 		(*args)[0] = "env";
@@ -50,17 +50,17 @@ bool custom_commands_handle(char *sringline, char ***args, char *program_name)
 	return (false);
 }
 /**
- * custom_command_execution - command format execution
- * @cmd: the argument of the command
- * @path: the path of the command
- * @program_name: the program name
+ * execute_custom_command - command format
+ * @cmd: argument of command
+ * @path: path of command
+ * @program_name: program_name
  *
- * custom argument handling
+ * handles custom argument
  *
  * Return: true if found,
- * false if generic
+ * false if general
  */
-bool custom_command_execution(char **path, char ***cmd, char *program_name)
+bool execute_custom_command(char **path, char ***cmd, char *program_name)
 {
 	long int exit_status = EXIT_SUCCESS;
 	size_t i;
@@ -96,9 +96,9 @@ bool custom_command_execution(char **path, char ***cmd, char *program_name)
 	return (false);
 }
 /**
- * print_env - environmet printing
+ * print_env - environ
  *
- * prints the envrionment
+ * prints env
  *
  * Return: void
  */
@@ -113,15 +113,15 @@ void print_env(void)
 	}
 }
 /**
- * _getline - custom the getline function
- * @lineptr: the address of buffering to fill
- * @len: the size of buffering
- * @file: the file to be read
- * @program_name: the program name
+ * _getline - custom getline
+ * @lineptr: address of buffer to fill
+ * @len: size of buffer
+ * @file: file to read
+ * @program_name: program name
  *
- * getline at home location
+ * getline at home
  *
- * Return: the Pointer to the entered line
+ * Return: Pointer to the entered line
  */
 ssize_t _getline(char **lineptr, ssize_t *len, FILE *file, char *program_name)
 {
