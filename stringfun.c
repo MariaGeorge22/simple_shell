@@ -1,31 +1,31 @@
 #include "main.h"
 /**
- * is_empty - test if str is empty
- * @stringline: str to test
+ * is_empty - check if str is empty
+ * @line: str to check
  *
- * test empty strs
+ * checks empty strs
  *
  * Return: bool
  */
-bool is_empty(char *stringline)
+bool is_empty(char *line)
 {
-	while (*stringline != '\0')
+	while (*line != '\0')
 	{
-		if (!isspace(*stringline))
+		if (!isspace(*line))
 		{
 			return (false);
 		}
-		stringline++;
+		line++;
 	}
 	return (true);
 }
 /**
- * safe_cpy - to copy stringline
+ * safe_cpy - copy str
  * @dest: destination
  * @src: destination
  * @program_name: destination
  *
- * copies stringline
+ * copys str
  *
  * Return: char *
  */
@@ -39,10 +39,10 @@ char *safe_cpy(char *dest, char *src, char *program_name)
 	return (dest);
 }
 /**
- * is_path - test the path
+ * is_path - check path
  * @cmd: command
  *
- * test the command
+ * checks if command is
  * a "path"ed one
  *
  * Return: bool
