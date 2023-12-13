@@ -30,7 +30,7 @@ int main(void)
 
 void display_prompt(void)
 {
-	printf("$ ");
+	printf("#cisfun$ ");
 	/* Flush output buffer to ensure the prompt is displayed immediately */
 	fflush(stdout);
 }
