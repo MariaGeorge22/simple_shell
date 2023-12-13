@@ -5,9 +5,9 @@
  *
  * test empty strs
  *
- * Return: logicbox
+ * Return: bool
  */
-logicbox is_empty(char *stringline)
+bool is_empty(char *stringline)
 {
 	while (*stringline != '\0')
 	{
@@ -45,11 +45,11 @@ char *safe_cpy(char *dest, char *src, char *program_name)
  * test the command
  * a "path"ed one
  *
- * Return: logicbox
+ * Return: bool
  */
-logicbox is_path(char *cmd)
+bool is_path(char *cmd)
 {
-	logicbox is_path = cmd[0] == '/' || strncmp(cmd, "./", 2) == 0 ||
+	bool is_path = cmd[0] == '/' || strncmp(cmd, "./", 2) == 0 ||
 				   strncmp(cmd, "../", 3) == 0;
 
 	return (is_path);
