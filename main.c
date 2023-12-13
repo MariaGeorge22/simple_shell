@@ -7,44 +7,40 @@
  */
 int main(void)
 {
-        char *line = NULL, *args[64];
-        int i = 0;
-        size_t len = 0;
-        pid_t child_pid;
+	char *line = NULL, *args[64];
+	int i = 0;
+	size_t len = 0;
+	pid_t child_pid;
 
-        while (1)
-        {
-                printf("#cisfun$ ");
-                getline(&line, &len, stdin);
+	while (1)
+	{
+		printf("#cisfun$ ");
+		getline(&line, &len, stdin);
 
-                /*      command = strtok(line, " \n");*/
+		args[i++] = strtok(line, " \n");
+		while (i < 63 && (args[i++] = strtok(NULL, " \n")) != NULL)
+		{
+		}
+		args[i] = NULL;
 
-                args[i++] = strtok(line, " \n");
-                while (i < 63 && (args[i++] = strtok(NULL, " \n")) != NULL);
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			perror("Error:");
+			exit(EXIT_FAILURE);
+		}
 
-                args[i] = NULL;
+		if (child_pid == 0)
+		{
+			execve(args[0], args, NULL);
+			perror("./main");
+			exit(EXIT_FAILURE);
+		}
+		else
+			wait(NULL);
+	}
 
-                child_pid = fork();
-                if (child_pid == -1)
-                {
-                        perror("Error:");
-                        exit(EXIT_FAILURE);
-                }
+	free(line);
 
-                if (child_pid == 0)
-                {
-                        execve(args[0], args, NULL);
-                        perror("execve");
-                        exit(EXIT_FAILURE);
-                }
-                else
-                        wait(NULL);
-
-        }
-
-
-
-        free(line);
-
-        return (0);
+	return (0);
 }
