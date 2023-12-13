@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -20,6 +21,12 @@
 #define ERROR -1
 #define TOK_D " \t\r\n\a\""
 
+/**
+ * struct list_paths - a struct for listing the directories of PATH
+ * @path: pointer to directory
+ * @len: length of path?
+ * @next: next node path
+ */
 typedef struct list_paths
 {
 	char *path;
