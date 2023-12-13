@@ -4,7 +4,7 @@
 
 void display_prompt(void);
 char *read_command(void);
-void execute_command(const char *command);
+void execute_command(const char *command, char *program_name);
 
 int main(void)
 {
@@ -59,10 +59,12 @@ char *read_command(void)
 	return buffer;
 }
 
-void execute_command(const char *command)
+void execute_command(const char *command, char *program_name)
 {
 	pid_t pid;
 	int status;
+	char *argv[] = {command, NULL};
+	char *envp[] = {NULL};
 
 	pid = fork();
 
@@ -75,8 +77,10 @@ void execute_command(const char *command)
 	if (pid == 0)
 	{
 		/* Child process */
-		if (execlp(command, command, (char *)NULL) == -1) {
-			perror("execlp");
+		if (execve(command, argv, envp) == -1)
+		{
+			perror(stderr, "%s: 1: %s: not found\n", program_name,
+				command);
 			exit(EXIT_FAILURE);
 		}
 	}
