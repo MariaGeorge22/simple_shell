@@ -30,11 +30,13 @@ typedef struct path
 	struct path *next;
 	char *value;
 } path;
+int handle_pipe(char *p, char **env);
+int read_cmd(char **path, char ***command_args, char *p);
 int get_command_args(char *line, char ***args, char **path,
 					 char *program_name);
 char *locate_relative_cmd(char *command, char *program_name);
 path *_getenv(char *var, char *program_name);
-int execute_command(char **path, char **argv[],
+int execute_cmd(char **path, char **argv[],
 					char *program_name, char **env);
 bool handle_custom_command(char *line, char ***args, char *program_name);
 bool execute_custom_command(char **path, char ***cmd, char *program_name);
