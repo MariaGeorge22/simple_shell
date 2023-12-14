@@ -2,7 +2,7 @@
 
 /**
  * main - simple shell
- * @argc: the number of arguments
+ * @argc: the number of the arguments
  * @argv: the arguments
  * @env: the environment
  *
