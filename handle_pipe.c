@@ -1,8 +1,7 @@
 #include "main.h"
 
 /**
- * handle_pipe - the pipe handling - run commands
- * in pipe mode
+ * handle_pipe - the pipe handling
  * @p: the name of the program
  * @env: environment
  *
