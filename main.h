@@ -21,7 +21,7 @@
 /**
  * struct path - Typedef for command args
  * @next: pointer for next entity
- * @value: string
+ * @value: string line
  *
  * Description: struct for passing arguments
  */

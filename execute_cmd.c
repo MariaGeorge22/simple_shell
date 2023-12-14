@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * execute_cmd - run the commands
+ * execute_cmd - run the command
  * @path: the path of the command
  * @argv: the arguments of the command
  * @p: the name of the program
