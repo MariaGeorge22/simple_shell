@@ -4,7 +4,7 @@
  * read_cmd - the commands that will be read
  * @path: the path of the command
  * @command_args: the command arguments
- * @p: command arguments
+ * @p: the command arguments
  *
  * commands formatting
  *
